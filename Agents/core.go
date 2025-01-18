@@ -66,6 +66,6 @@ func (a *Agents) loadApiKey() string {
 
 }
 
-func (a *Agents) RunAgent(ctx context.Context, message []llm.Message, contextVariables map[string]interface{}) (swarmgo.Response, error) {
+func (a *Agents) Execute(ctx context.Context, message []llm.Message, contextVariables map[string]interface{}) (swarmgo.Response, error) {
 	return a.Core.Run(ctx, a.Agent, message, contextVariables, a.modelOverride, a.Stream, a.Debug, a.MaxTurns, a.ExecuteTools)
 }
