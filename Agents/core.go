@@ -1,6 +1,8 @@
 package agents
 
 import (
+	"context"
+
 	beego "github.com/beego/beego/v2/server/web"
 	"github.com/prathyushnallamothu/swarmgo"
 	"github.com/prathyushnallamothu/swarmgo/llm"
@@ -11,28 +13,29 @@ type Agents struct {
 	Model         string
 	Instructions  string
 	provider      llm.LLMProvider
-	Agent         *swarmgo.Swarm
+	Core          *swarmgo.Swarm
+	Agent         *swarmgo.Agent
 	modelOverride string
 	Stream        bool
 	Debug         bool
 	MaxTurns      int
-	executeTools  bool
+	ExecuteTools  bool
 	Functions     []swarmgo.AgentFunction
 }
 
-func (a *Agents) LoadAgent() *swarmgo.Agent {
+func (a *Agents) LoadAgent() {
 	agent := &swarmgo.Agent{
 		Name:         a.Name,
 		Model:        a.Model,
 		Instructions: a.Instructions,
 		Provider:     a.provider,
 	}
+	a.Agent = agent
 	a.initSwarm()
-	return agent
 }
 
 func (a *Agents) initSwarm() {
-	a.Agent = swarmgo.NewSwarm(a.loadApiKey(), a.provider)
+	a.Core = swarmgo.NewSwarm(a.loadApiKey(), a.provider)
 }
 
 func (a *Agents) loadApiKey() string {
@@ -61,4 +64,8 @@ func (a *Agents) loadApiKey() string {
 	}
 	return ""
 
+}
+
+func (a *Agents) RunAgent(ctx context.Context, message []llm.Message, contextVariables map[string]interface{}) (swarmgo.Response, error) {
+	return a.Core.Run(ctx, a.Agent, message, contextVariables, a.modelOverride, a.Stream, a.Debug, a.MaxTurns, a.ExecuteTools)
 }
