@@ -1,0 +1,7 @@
+:root {
+    --primary-color: #fff; /* Default to light theme */
+  }
+
+  body {
+    background-color: var(--primary-color);
+  }
