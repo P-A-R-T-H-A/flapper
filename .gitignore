@@ -1,4 +1,4 @@
-*conf
+*.conf
 .exe
 .DS_Store
 flapper
