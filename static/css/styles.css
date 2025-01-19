@@ -1,0 +1,33 @@
+:root {
+    --nav-logo-order: 1;
+    --nav-invisible-order: 2;
+    --container-px: 60px;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+nav {
+    padding: 20px var(--container-px);
+}
+
+.brand {
+    order: var(--nav-logo-order);
+}
+
+.invisible {
+    order: var(--nav-invisible-order);
+}
+
+.menu {
+    order: 3;
+}
+
+.custom-container {
+    padding: 0 var(--container-px);
+}

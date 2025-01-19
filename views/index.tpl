@@ -12,26 +12,10 @@
 </head>
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Flapper</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <nav class="flex justify-between">
+      <div class="brand"><img src="/static/images/logoipsum-348.svg" alt=""></div>
+      <div class="invisible">Destinations</div>
+      <div class="menu">Destinations</div>
     </nav>
   </header>
 
@@ -40,6 +24,7 @@
       <div class="col-12">
         <h1>Welcome to Flapper</h1>
         <p>Your content goes here...</p>
+        <button id="order-toggle">Toggle Order</button>
       </div>
     </div>
   </main>
