@@ -39,7 +39,11 @@
     <div class="row">
       <div class="col-12">
         <h1>Welcome to Flapper</h1>
-        <p>Your content goes here...</p>
+        <h1>Voice Assistant</h1>
+        <div id="status">Say "Hello" to activate (en-US) or press the button</div>
+        <div id="output">Waiting for wake word...</div>
+        <button id="micButton" class="mic-button">🎙️</button>
+        <script src="/static/js/script.js"></script>
       </div>
     </div>
   </main>

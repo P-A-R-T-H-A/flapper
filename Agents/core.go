@@ -12,7 +12,7 @@ type Agents struct {
 	Name          string
 	Model         string
 	Instructions  string
-	provider      llm.LLMProvider
+	Provider      llm.LLMProvider
 	Core          *swarmgo.Swarm
 	Agent         *swarmgo.Agent
 	modelOverride string
@@ -28,14 +28,14 @@ func (a *Agents) LoadAgent() {
 		Name:         a.Name,
 		Model:        a.Model,
 		Instructions: a.Instructions,
-		Provider:     a.provider,
+		Provider:     a.Provider,
 	}
 	a.Agent = agent
 	a.initSwarm()
 }
 
 func (a *Agents) initSwarm() {
-	a.Core = swarmgo.NewSwarm(a.loadApiKey(), a.provider)
+	a.Core = swarmgo.NewSwarm(a.loadApiKey(), a.Provider)
 }
 
 func (a *Agents) loadApiKey() string {
@@ -59,7 +59,7 @@ func (a *Agents) loadApiKey() string {
 		llm.DeepSeek:        deepSeekApiKey,
 	}
 
-	if apiKey, ok := apiKeyMap[a.provider]; ok {
+	if apiKey, ok := apiKeyMap[a.Provider]; ok {
 		return apiKey
 	}
 	return ""
