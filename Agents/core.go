@@ -12,10 +12,10 @@ type Agents struct {
 	Name          string
 	Model         string
 	Instructions  string
-	provider      llm.LLMProvider
+	Provider      llm.LLMProvider
 	Core          *swarmgo.Swarm
 	Agent         *swarmgo.Agent
-	modelOverride string
+	ModelOverride string
 	Stream        bool
 	Debug         bool
 	MaxTurns      int
@@ -28,14 +28,14 @@ func (a *Agents) LoadAgent() {
 		Name:         a.Name,
 		Model:        a.Model,
 		Instructions: a.Instructions,
-		Provider:     a.provider,
+		Provider:     a.Provider,
 	}
 	a.Agent = agent
 	a.initSwarm()
 }
 
 func (a *Agents) initSwarm() {
-	a.Core = swarmgo.NewSwarm(a.loadApiKey(), a.provider)
+	a.Core = swarmgo.NewSwarm(a.loadApiKey(), a.Provider)
 }
 
 func (a *Agents) loadApiKey() string {
@@ -59,7 +59,7 @@ func (a *Agents) loadApiKey() string {
 		llm.DeepSeek:        deepSeekApiKey,
 	}
 
-	if apiKey, ok := apiKeyMap[a.provider]; ok {
+	if apiKey, ok := apiKeyMap[a.Provider]; ok {
 		return apiKey
 	}
 	return ""
@@ -67,5 +67,5 @@ func (a *Agents) loadApiKey() string {
 }
 
 func (a *Agents) Execute(ctx context.Context, message []llm.Message, contextVariables map[string]interface{}) (swarmgo.Response, error) {
-	return a.Core.Run(ctx, a.Agent, message, contextVariables, a.modelOverride, a.Stream, a.Debug, a.MaxTurns, a.ExecuteTools)
+	return a.Core.Run(ctx, a.Agent, message, contextVariables, a.ModelOverride, a.Stream, a.Debug, a.MaxTurns, a.ExecuteTools)
 }
